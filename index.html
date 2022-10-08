@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+</head>
+<body>
+  <div class="container-lg vh-100 p-0" id="app">
+    <div class="row py-2 m-0">
+      <div class="lg-side-menu-chevon gx-0">
+        <i class="chevron-right fa-solid fa-chevron-right"></i>
+        <div class="mask"></div>
+        <i class="chevron-left fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="side-menu col-xl-3 col-lg-4 gx-0 h-100 py-xl-5 p-lg-2 p-sm-0 border border-2">
+          <p class="side-menu-header border-bottom border-2 p-3 mb-2 fs-5 fw-bold">透過以下分類搜尋：</p>
+          <div class="dropdown">
+            <a class="d-flex w-100 justify-content-between text-dark text-decoration-none p-3 pb-0" href="#" role="button" @click="updateFacilityDropdownStatus">
+              <span class="mb-2 fs-6 fw-bold">飯店設施</span>
+              <i class="fa-solid fa-chevron-down" v-if="facilityDropdownStatus == true"></i>
+              <i class="fa-solid fa-chevron-up" v-if="facilityDropdownStatus != true"></i>
+            </a>
+            <ul class="w-100 m-0 p-0" v-show="facilityDropdownStatus">
+              <label for="checkbox1" class="w-100">
+                <li class="dropdown-item py-2">
+                  <input type="checkbox" class="form-check-input mt-0 me-2" id="checkbox1" name="checkbox1" v-model="checkboxStatus" value="wifi" @change="sideMenuFilter">
+                  <span>免費無線網路</span>
+                </li>
+              </label>
+              <label for="checkbox2" class="w-100">
+                <li class="dropdown-item py-2">
+                  <input type="checkbox" class="form-check-input mt-0 me-2" id="checkbox2" name="checkbox2" v-model="checkboxStatus" value="noSmoking" @change="sideMenuFilter">
+                  <span>禁菸客房</span>
+                </li>
+              </label>
+              <label for="checkbox3" class="w-100">
+                <li class="dropdown-item py-2">
+                  <input type="checkbox" class="form-check-input mt-0 me-2" id="checkbox3" name="checkbox3" v-model="checkboxStatus" value="kitchen" @change="sideMenuFilter">
+                  <span>廚房</span>
+                </li>
+              </label>
+              <label for="checkbox4" class="w-100">
+                <li class="dropdown-item py-2">
+                  <input type="checkbox" class="form-check-input mt-0 me-2" id="checkbox4" name="checkbox4" v-model="checkboxStatus" value="laundryRoom" @change="sideMenuFilter">
+                  <span>洗衣房</span>
+                </li>
+              </label>
+              <label for="checkbox5" class="w-100">
+                <li class="dropdown-item py-2">
+                  <input type="checkbox" class="form-check-input mt-0 me-2" id="checkbox5" name="checkbox5" v-model="checkboxStatus" value="park" @change="sideMenuFilter">
+                  <span>停車場</span>
+                </li>
+              </label>
+              <label for="checkbox6" class="w-100">
+                <li class="dropdown-item py-2">
+                  <input type="checkbox" class="form-check-input mt-0 me-2" id="checkbox6" name="checkbox6" v-model="checkboxStatus" value="petFriendly" @change="sideMenuFilter">
+                  <span>寵物友善</span>
+                </li>
+              </label>
+            </ul>
+          </div>
+      </div>
+      <div class="main col-xl-9 col-lg-12 d-flex flex-wrap ps-4">
+        <div class="find w-75">
+          <p class="h-100 d-flex align-items-center mb-0 fs-4 fw-bold lh-lg">找到 {{ data.length }} 間住宿</p>
+        </div>
+        <div class="select w-25 d-flex justify-content-end align-items-center">
+          <select class="form-select w-75 fs-6 fw-bold" id="floatingSelect" aria-label="Floating label select example" @change="updateSortStatus($event), sortChange()">
+            <option value="0">為您精選</option>
+            <option value="1">價格由低至高</option>
+            <option value="2">價格由高至低</option>
+            <option value="3">星級最高</option>
+          </select>
+        </div>
+        <ul class="card-list my-2 p-0">
+          <li class="row gx-0 mb-4 border" v-for="hotel in data">
+              <div class="card-list-img col-sm-4 col-xs-12 d-flex p-0">
+                <img :src="hotel.img" class="img-fluid" alt="">
+                </div>
+              <div class="col-sm-8 col-xs-12 d-flex justify-content-between p-3">
+                <div class="title-and-description">
+                  <h2 class="card-title fs-5 fw-bold lh-1">{{ hotel.name }}</h2>
+                  <span class="position d-block mb-2"><i class="fa-solid fa-location-dot me-2"></i>{{ hotel.position }}</span>
+                  <p class="desription lh-base">{{ hotel.description }}</p>
+                </div>
+                <div class="rate-and-price d-flex justify-content-between align-items-end flex-column">
+                  <div class="rate w-100 h-50 d-flex justify-content-end align-items-center">
+                    <span class="fw-bold">{{ checkRate(hotel.rate) }}</span>
+                    <span class="rate-points d-flex justify-content-center align-items-center fs-3 p-2 ms-2 rounded-3 text-white fw-bolder">{{ hotel.rate }}</span>
+                  </div>
+                  <div class="price">
+                    <span class="fs-4 m-1">NT${{ plusComma(hotel.price) }}</span>
+                    <span>起</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script defer src="https://kit.fontawesome.com/0a024d1a12.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.prod.min.js"></script>
+  <script defer src="./js/all.js"></script>
+</body>
+</html>

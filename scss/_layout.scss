@@ -1,0 +1,151 @@
+*:not(i){
+  font-family: "microsoft jhenghei" !important;
+  color: #1A2B48;
+}
+
+*:not(.card-list){
+  user-select: none;
+}
+
+body,html{
+  overflow-x: hidden;
+}
+
+
+.side-menu{
+  border-color: #D7DCE3;
+  .side-menu-header{
+    border-color: #D7DCE3;
+  }
+  .dropdown ul label{
+    cursor: pointer;
+    li input:focus{
+      box-shadow: none;
+    }
+  }
+  @include lg{
+    display: none;
+    position: fixed;
+    top: calc(1rem + 75px);
+    background-color: #FFF;
+    height: auto !important;
+    &.active{
+      display: block;
+    }
+    z-index: 1;
+  }
+  @include md{
+    max-width: 33.33333%;
+    left: 2.5%;
+  }
+  @include sm{
+    left: 0;
+  }
+  @include xs{
+    max-width: 60%;
+  }
+}
+
+.lg-side-menu-chevon{
+  display: none;
+  font-size: 20px;
+  width: 40px !important;
+  height: 50px !important;
+  background-color: #fff;
+  border: 2px solid #D7DCE3;
+  border-radius: 0% 30% 30% 0%;
+  border-left: unset;
+  cursor: pointer;
+  z-index: 10;
+  @include lg{
+    @include flex;
+    position: fixed;
+    top: calc(1rem + 75px);
+    .chevron-left{
+      display: none;
+    }
+    &.active{
+      left: calc(33.33333% + (100% - 960px)/2 - 2px);
+      .chevron-right{
+        display: none;
+      }
+      .chevron-left{
+        display: block;
+      }
+    }
+  }
+  @include md{
+    left: 2.5%;
+    &.active{
+      left: calc(33.33333% + 2.5% - 2px);
+    }
+  }
+  @include sm{
+    left: 0;
+    &.active{
+      left: calc(33.33333% - 2px);
+    }
+  }
+  @include xs{
+    &.active{
+      left: calc(60% - 2px)
+    }
+  }
+}
+
+.main{
+  max-height: 375px; // header + 1 card = 375px
+  @include sm{
+    padding: 2% !important;
+  }
+}
+
+.find, .select{
+  height: 75px;
+}
+
+.card-list li{
+  border-color: #DFDFDF;
+  height: 300px;
+  overflow: hidden;
+  img{
+    object-fit: cover;
+  }
+  .title-and-description{
+    width: 70%;
+    text-align: justify;
+    .position{
+      color: #A5292A;
+      i{
+        color: #A5292A;
+      }
+    }
+    @include xs{
+      width: 60%;
+    }
+  }
+  .rate-and-price{
+    width: 30%;
+    .rate-points{
+      background-color: #E60015;
+    }
+    .price span:last-child{
+      color: #5E6D77;
+    }
+    @include xs{
+      width: 40%;
+    }
+  }
+  @include xs{
+    height: 475px;
+    .card-list-img{
+      @include flex;
+      img{
+        max-height: 200px;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+
