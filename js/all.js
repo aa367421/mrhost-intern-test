@@ -89,16 +89,16 @@ const dataRaw = [
         "petFriendly": true
       }
     },
-  ];
+];
 
 dataRaw.forEach(item => {
     let rawLength = item.description.length;
-    if (window.innerWidth <= 576 && window.innerWidth > 460){
-        item.description = item.description.slice(0, rawLength / 1.5) + '……';
+    if (window.innerWidth > 576){
         return;
-    } else if (window.innerWidth <= 460){
+    } else if (window.innerWidth <= 576 && window.innerWidth > 460){
+        item.description = item.description.slice(0, rawLength / 1.5) + '……';
+    } else {
         item.description = item.description.slice(0, rawLength / 2) + '……';
-        return
     }
 })
   
