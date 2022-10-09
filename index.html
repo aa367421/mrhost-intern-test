@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <title>李文哲__mrhost intern test</title>
+
+    <meta name='description' content="李文哲　mrhost intern test, Start: 221007  Latest: 221009">
+
+    <meta property="og:title" content="李文哲 mrhost intern test">
+    <meta property="og:description" content="Start: 221007  Latest: 221009">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="#">
+    <meta property="og:img" content="#">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="zh-Hant">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/all.css">
@@ -77,7 +86,7 @@
             <option value="3">星級最高</option>
           </select>
         </div>
-        <ul class="card-list my-2 p-0">
+        <ul class="card-list my-2 p-0 col-12">
           <li class="row gx-0 mb-4 border" v-for="hotel in data">
               <div class="card-list-img col-sm-4 col-xs-12 d-flex p-0">
                 <img :src="hotel.img" class="img-fluid" alt="">
@@ -88,7 +97,7 @@
                   <span class="position d-block mb-2"><i class="fa-solid fa-location-dot me-2"></i>{{ hotel.position }}</span>
                   <p class="desription lh-base">{{ hotel.description }}</p>
                 </div>
-                <div class="rate-and-price d-flex justify-content-between align-items-end flex-column">
+              <div class="rate-and-price d-flex justify-content-between align-items-end flex-column">
                   <div class="rate w-100 h-50 d-flex justify-content-end align-items-center">
                     <span class="fw-bold">{{ checkRate(hotel.rate) }}</span>
                     <span class="rate-points d-flex justify-content-center align-items-center fs-3 p-2 ms-2 rounded-3 text-white fw-bolder">{{ hotel.rate }}</span>
@@ -97,9 +106,12 @@
                     <span class="fs-4 m-1">NT${{ plusComma(hotel.price) }}</span>
                     <span>起</span>
                   </div>
-                </div>
               </div>
-            </li>
+            </div>
+          </li>
+          <div class="no-result h-25 pt-5 text-center fs-3" v-if="data.length == 0">
+            暫時沒有符合需求的房間，試試重設搜尋分類！
+          </div>
         </ul>
       </div>
     </div>

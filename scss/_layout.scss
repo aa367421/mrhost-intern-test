@@ -3,7 +3,7 @@
   color: #1A2B48;
 }
 
-*:not(.card-list){
+.side-menu, .find, .select{
   user-select: none;
 }
 
@@ -65,7 +65,7 @@ body,html{
       display: none;
     }
     &.active{
-      left: calc(33.33333% + (100% - 960px)/2 - 2px);
+      left: calc(33.33333% + (100% - 960px) / 2 - 2px);
       .chevron-right{
         display: none;
       }
@@ -102,6 +102,9 @@ body,html{
 
 .find, .select{
   height: 75px;
+  @include sm{
+    width: 50% !important;
+  }
 }
 
 .card-list li{

@@ -3,7 +3,7 @@
   color: #1A2B48;
 }
 
-*:not(.card-list) {
+.side-menu, .find, .select {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -129,6 +129,11 @@ body, html {
 
 .find, .select {
   height: 75px;
+}
+@media (max-width: 768px) {
+  .find, .select {
+    width: 50% !important;
+  }
 }
 
 .card-list li {
